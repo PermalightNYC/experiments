@@ -1,0 +1,31 @@
+{
+  "name": "mannafdn-eleventy",
+  "version": "4.0.0",
+  "description": "",
+  "scripts": {
+    "build": "npx eleventy",
+    "watch": "npx eleventy --watch",
+    "debug": "DEBUG=* npx eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dleatherman/mannafdn-eleventy.git"
+  },
+  "author": {
+    "name": "Dan Leatherman",
+    "email": "dleatherman@gmail.com",
+    "url": "http://danleatherman.com/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dleatherman/mannahfdn-eleventy/issues"
+  },
+  "homepage": "https://github.com/dleatherman/mannahfdn-eleventy#readme",
+  "dependencies": {
+    "@11ty/eleventy": "0.2.15",
+    "luxon": "^0.3.1"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.0"
+  }
+}
