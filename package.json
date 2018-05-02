@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/dleatherman/mannahfdn-eleventy#readme",
   "dependencies": {
-    "@11ty/eleventy": "0.2.15",
+    "@11ty/eleventy": "0.3.3",
     "luxon": "^0.3.1"
   },
   "devDependencies": {

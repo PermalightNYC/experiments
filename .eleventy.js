@@ -11,7 +11,8 @@ module.exports = function(eleventyConfig) {
       'md',
       'njk',
       'html',
-      'css'
+      'css',
+      'js'
     ],
 
     pathPrefix: '/',

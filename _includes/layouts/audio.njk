@@ -1,0 +1,36 @@
+{% extends 'layouts/base.njk' %}
+
+{% block nav %}
+<ul class="category--list">
+  <li>
+    <a href="{{ '/audio/amplitude/' | url }}" class="category--title">
+      Amplitude
+      <div class="tag--tech">JS / p5 / Sound</div>
+    </a>
+  </li>
+  <li>
+    <a href="{{ '/audio/circles/' | url }}" class="category--title">
+      Circles
+      <div class="tag--tech">JS / p5 / Sound</div>
+    </a>
+  </li>
+  <li>
+    <a href="{{ '/audio/drawing/' | url }}" class="category--title">
+      Drawing
+      <div class="tag--tech">JS / p5 / Sound</div>
+    </a>
+  </li>
+  <li>
+    <a href="{{ '/3d/particles/' | url }}" class="category--title">
+      Particles
+      <div class="tag--tech">JS / p5 / 3D</div>
+    </a>
+  </li>
+  {# <li>
+    <a href="{{ '/3d/modeling/' | url }}" class="category--title">
+      Modeling
+      <div class="tag--tech">JS / p5 / 3D</div>
+    </a>
+  </li> #}
+</ul>
+{% endblock %}
