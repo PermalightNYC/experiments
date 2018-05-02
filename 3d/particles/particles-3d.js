@@ -4,7 +4,7 @@ var fps = 60;
 var system;
 var listOfColors = [];
 var playing = true;
-var fullLight = false;
+var fullLight = true;
 var sphereDiameter = 10;
 
 var mouseRadius = 20; //Repelling radius
