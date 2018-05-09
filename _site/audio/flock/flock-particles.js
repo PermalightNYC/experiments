@@ -8,7 +8,7 @@ var colors;
 var flock;
 
 function preload() {
-  song = loadSound('/js/audio/love-wont-let-me-down.wav');
+  song = loadSound('/js/audio/love-wont-let-me-down.mp3');
 }
 
 function windowResized() {

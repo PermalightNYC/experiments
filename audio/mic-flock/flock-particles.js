@@ -36,7 +36,7 @@ function draw() {
   //   console.log(rms*100);
   // }
   if (frameCount%3 === 0) {
-    console.log(rms);
+    // console.log(rms);
     flock.addBoid(new Boid(width/2, height/2, lerpColor(colors[0], colors[1], random(1)), rms*500));
   }
   flock.run();
