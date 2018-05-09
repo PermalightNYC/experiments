@@ -5,7 +5,7 @@ var yoff = 0.0;
 var listOfColors = [];
 
 function preload() {
-  song = loadSound('/js/audio/gods-plan.mp3');
+  song = loadSound('/js/audio/love-wont-let-me-down.mp3');
 }
 
 function setup() {
@@ -18,6 +18,7 @@ function setup() {
 }
 
 function draw() {
+  background(0);
   // Get the average (root mean square) amplitude
   var rms = analyzer.getLevel();
   fill(getRandomColor());

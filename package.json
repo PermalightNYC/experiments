@@ -1,5 +1,5 @@
 {
-  "name": "mannafdn-eleventy",
+  "name": "experiments-eleventy",
   "version": "4.0.0",
   "description": "",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/dleatherman/mannafdn-eleventy.git"
+    "url": "git://github.com/PermalightNYC/experiments.git"
   },
   "author": {
     "name": "Dan Leatherman",
@@ -18,9 +18,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dleatherman/mannahfdn-eleventy/issues"
+    "url": "https://github.com/PermalightNYC/experiments/issues"
   },
-  "homepage": "https://github.com/dleatherman/mannahfdn-eleventy#readme",
+  "homepage": "https://github.com/PermalightNYC/experiments#readme",
   "dependencies": {
     "@11ty/eleventy": "0.3.3",
     "luxon": "^0.3.1"

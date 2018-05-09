@@ -2,10 +2,20 @@ p5.disableFriendlyErrors = true;
 var debug = false;
 var fps = 60;
 var system;
-var listOfColors = [];
+var colors = [];
 var playing = true;
 var fullLight = true;
-var sphereDiameter = 10;
+var particleDelay = 5;
+var sphereRadius = 4;
+var nucleus = false;
+
+// gui
+var visible = true;
+var gui, gui2;
+
+var particleDelayMin = 1;
+var particleDelayMax = 10;
+var particleDelayStep = 1;
 
 var mouseRadius = 20; //Repelling radius
 
@@ -14,36 +24,45 @@ function windowResized() {
 }
 
 function setup() {
-  listOfColors = [color('#b5c1cc'), color('#5b636a'), color('#66ffff'), color('#6600ff')];
+  colors = [color('#6e40d5'), color('#1e1e1e')];
   background(0);
   createCanvas(windowWidth, windowHeight, WEBGL);
   pixelDensity(1.5);
   frameRate(fps);
   system = new ParticleSystem(createVector(width/2, height/2, 0));
+  // Create Layout GUI
+  gui = createGui('Options', width - 225, 15);
+  gui.addGlobals('fullLight');
+
 }
 
 function draw() {
   background(0);
-  rotateY(millis() / 2500);
+  rotateY(millis() / 5000);
   rotateZ(millis() / 5000);
+  // rotateX(millis() / 5000);
+
+  if (nucleus) {
+    push();
+      ambientMaterial(colors[0]);
+      translate(0,0,0);
+      noStroke();
+      sphere(sphereRadius*4);
+    pop();
+  }
+
   if (!fullLight) {
     directionalLight(255, width/2, height/2, 0);
-    ambientLight(sphereDiameter*8);
+    ambientLight(225);
   } else {
     ambientLight(255);
   }
-  system.addParticle();
+
+  if (frameCount%particleDelay == 0) {
+    system.addParticle();
+  }
   system.run();
   debugHelpers();
-}
-
-function mousePressed() {
-  if (playing) {
-    noLoop()
-  } else {
-    loop()
-  }
-  playing = !playing;
 }
 
 
@@ -51,10 +70,11 @@ function mousePressed() {
 var Particle = function(position) {
   this.acceleration = createVector(0, 0, 0);
   this.velocity = createVector(random(-1, 1), random(-1, 1), random(-1, 1));
-  this.color = getRandomColor();
+  this.color = lerpColor(colors[0], colors[1], random(0,1));
   this.position = position.copy();
+  this.size = random(sphereRadius,sphereRadius*2);
   this.history = [];
-  this.lifespan = 800.0;
+  this.lifespan = width;
 };
 
 Particle.prototype.run = function() {
@@ -84,7 +104,7 @@ Particle.prototype.display = function() {
   }
   push()
   translate(width/2 - this.position.x, height/2 - this.position.y, this.position.z);
-  sphere(sphereDiameter);
+  sphere(this.size);
   pop()
   // stroke(this.color, this.lifespan);
   if (!fullLight) {
@@ -97,7 +117,7 @@ Particle.prototype.display = function() {
   // for (var i = 1; i < 5; i++) {
   //   push();
   //   translate(width/2 - this.position.x, height/2 - this.position.y, this.position.z);
-  //   sphere(sphereDiameter/3);
+  //   sphere(sphereRadius/3);
   //   pop();
   // }
   // pop();
@@ -140,7 +160,7 @@ ParticleSystem.prototype.run = function() {
 //*****************************
 
 function getRandomColor() {
-  return listOfColors[int(random(0, listOfColors.length))];
+  return colors[int(random(0, colors.length))];
 }
 function currentMouseX(){
   return mouseX - width/2;

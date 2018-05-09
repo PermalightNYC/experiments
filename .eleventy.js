@@ -6,6 +6,10 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('css');
   eleventyConfig.addPassthroughCopy('js');
 
+  eleventyConfig.addCollection('hillsongtech', function(collection) {
+    return collection.getFilteredByGlob('hillsongtech/*/**.*').reverse();
+  });
+
   return {
     templateFormats: [
       'md',

@@ -6,7 +6,7 @@ var system2;
 var listOfColors = [];
 var playing = true;
 var fullLight = true;
-var sphereDiameter = 20;
+var sphereRadius = 8;
 
 var mouseRadius = 20; //Repelling radius
 
@@ -15,7 +15,7 @@ function windowResized() {
 }
 
 function setup() {
-  listOfColors = [color('#b5c1cc'), color('#5b636a'), color('#66ffff'), color('#6600ff')];
+  listOfColors = [color('#e7ff1b'), color('#e1595d'), color('#6e40d5'), color('#7bdce4'), color('#a0ff79'), color('#e0e0e0'), color('#ffffff')];
   background(0);
   createCanvas(windowWidth, windowHeight);
   pixelDensity(1.5);
@@ -43,10 +43,11 @@ function mousePressed() {
 // A simple Particle class
 var Particle = function(position) {
   this.acceleration = createVector(random(-0.001,0.001), random(-0.001,0.001));
-  this.velocity = createVector(random(-1, 1), random(-1, 1));
-  this.color = color(getRandomColor());
+  this.velocity = p5.Vector.random2D();
+  this.color = lerpColor(getRandomColor(),getRandomColor(),random(1));
   this.position = position.copy();
-  this.lifespan = 500.0;
+  this.size = random(sphereRadius, sphereRadius*2);
+  this.lifespan = 800.0;
 };
 
 Particle.prototype.run = function() {
@@ -68,7 +69,7 @@ Particle.prototype.display = function() {
   c._array[3] = this.lifespan / 255;
   fill(c);
   push()
-  ellipse(width - this.position.x, height - this.position.y, sphereDiameter);
+  ellipse(width - this.position.x, height - this.position.y, this.size);
   pop()
   // stroke(this.color, this.lifespan);
   // line(width - this.position.x, height - this.position.y, width/2, height/2);
