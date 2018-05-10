@@ -23,7 +23,9 @@ module.exports = function(eleventyConfig) {
     templateFormats: [
       'md',
       'njk',
-      'html'
+      'html',
+      'js',
+      'css'
     ],
 
     pathPrefix: '/',
