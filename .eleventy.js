@@ -6,6 +6,15 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('css');
   eleventyConfig.addPassthroughCopy('js');
 
+  eleventyConfig.addCollection('experiments', function(collection) {
+    return collection.getAll().reverse().filter(function(item) {
+      // console.log('status' in item.data);
+      if ('status' in item.data == true) {
+        return item.data
+      }
+    });
+  });
+
   eleventyConfig.addCollection('hillsongtech', function(collection) {
     return collection.getFilteredByGlob('hillsongtech/*/**.*').reverse();
   });
@@ -14,9 +23,7 @@ module.exports = function(eleventyConfig) {
     templateFormats: [
       'md',
       'njk',
-      'html',
-      'css',
-      'js'
+      'html'
     ],
 
     pathPrefix: '/',
