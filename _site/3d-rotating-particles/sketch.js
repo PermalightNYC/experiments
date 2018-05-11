@@ -8,6 +8,7 @@ var fullLight = true;
 var particleDelay = 5;
 var sphereRadius = 4;
 var nucleus = false;
+var sound;
 
 // gui
 var visible = true;
@@ -18,6 +19,9 @@ var particleDelayMax = 10;
 var particleDelayStep = 1;
 
 var mouseRadius = 20; //Repelling radius
+
+function preload() {
+}
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
@@ -38,11 +42,11 @@ function setup() {
 
 function draw() {
   background(0);
-  rotateY(millis() / 5000);
-  rotateZ(millis() / 5000);
+  // rotateY(millis() / 5000);
+  // rotateZ(millis() / 5000);
   // rotateX(millis() / 5000);
 
-  // orbitControl();
+  orbitControl();
 
   if (nucleus) {
     push();
