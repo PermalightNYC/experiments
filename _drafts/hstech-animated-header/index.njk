@@ -1,0 +1,19 @@
+---
+title: HS Tech Animated Header
+tags:
+- JS
+- p5
+date: 2018-05-06
+---
+{% extends 'layouts/experiment.njk' %}
+{% block styles %}
+  <link rel="stylesheet" href="particles.css">
+{% endblock %}
+{% block nav %}{% endblock %}
+{% block scripts %}
+  <script src="/js/p5.min.js"></script>
+  <script src="sketch.js"></script>
+{% endblock %}
+{% block footer %}{% endblock %}
+
+<div id="particle-animation"></div>
