@@ -49,3 +49,28 @@ document.addEventListener('click', function (e) {
     .replay();
 
 });
+
+document.addEventListener('touchstart', function (e) {
+  const x = e.pageX,
+        y = { [e.pageY]: e.pageY-150 };
+  swirl1
+    .tune({ x, y })
+    .generate()
+    .replay();
+
+  swirl2
+    .tune({ x, y })
+    .generate()
+    .replay();
+
+  swirl3
+    .tune({ x, y })
+    .generate()
+    .replay();
+
+  swirl4
+    .tune({ x, y })
+    .generate()
+    .replay();
+
+});
