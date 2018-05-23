@@ -1,7 +1,7 @@
 
 
 
-// p5.disableFriendlyErrors = true;
+p5.disableFriendlyErrors = true;
 
 var homeHero = function(anim) {
   var fps = 30;
@@ -14,7 +14,7 @@ var homeHero = function(anim) {
   var mainSize = 20;
   var bgImg;
   var fgImg;
-  var defaultLifespan = 700;
+  var defaultLifespan = 600;
   var black;
 
   anim.preload = function() {
@@ -29,21 +29,18 @@ var homeHero = function(anim) {
 
   anim.setup = function() {
     colors = [anim.color('#6e40d5'), anim.color('#1e1e1e')];
-    black = anim.color('#171717');
-    anim.background(black);
     anim.pixelDensity(1.5);
     anim.frameRate(fps);
     anim.imageMode(anim.CENTER);
 
-    canvas = anim.createCanvas(anim.windowWidth, anim.windowHeight);
+    canvas = anim.createCanvas(anim.windowWidth, anim.windowHeight, anim.WEBGL);
     system = new ParticleSystem(anim.createVector(anim.width/2, anim.height/2));
   }
 
   anim.draw = function() {
-    anim.background(black);
-    anim.image(bgImg,anim.width/2,anim.height/2, anim.width);
+    anim.background(anim.color(0,0,0,0));
 
-    var modulo = getRandomInt(10,20);
+    var modulo = getRandomInt(20,30);
     if (anim.frameCount%modulo===0) {
       drawCircle();
     }
@@ -52,23 +49,27 @@ var homeHero = function(anim) {
   }
 
   function drawCircle() {
-    system.addParticle(-anim.width/3.5,0);
+    system.addParticle(anim.width/4,anim.height/2, 0);
   }
 
   function drawForegroundImage() {
+    anim.fill(0,0,0,0);
+    anim.texture(fgImg);
+    anim.noStroke();
     if (anim.width > 768) {
-      anim.image(fgImg, anim.width - fgImg.width/2, anim.height/2, fgImg.width/2, fgImg.height/2);
+      anim.translate(anim.width/3.8, 0, 0);
+      anim.plane(fgImg.width/2, fgImg.height/2);
     } else {
-      anim.image(fgImg, anim.width - 100, anim.height/2, fgImg.width/2, fgImg.height/2);
+      anim.translate(fgImg.width/4, 0, 0);
+      anim.plane(fgImg.width/2, fgImg.height/2);
     }
   }
 
 
-  // A simple Particle class
   var Particle = function(position) {
-    // console.log('Position ', position);
-    this.acceleration = anim.createVector(getRandom(-0.1,0.1), getRandom(-0.1,0.1));
-    this.velocity = p5.Vector.random2D();
+    this.acceleration = anim.createVector(getRandom(-0.1,0.1, 0), getRandom(-0.1,0.1, 0));
+    var velocityStart = p5.Vector.random3D();
+    this.velocity = anim.createVector(velocityStart.x * 1.75, velocityStart.y * 1.75, velocityStart.z * 1.75);
     this.color = anim.lerpColor(getRandomColor(),getRandomColor(),getRandom(0,1));
     this.position = position.copy();
     this.history = [];
@@ -83,7 +84,6 @@ var homeHero = function(anim) {
 
   // Method to update position
   Particle.prototype.update = function(){
-    this.velocity.add(anim.createVector(this.acceleration.x * (this.lifespan), this.acceleration.y * (this.lifespan)));
     this.position.add(this.velocity);
     this.history.push(anim.createVector(this.position.x,this.position.y));
     this.lifespan -= 2;
@@ -152,7 +152,9 @@ var homeHero = function(anim) {
   }
 
   function getRandomInt(min,max) {
-    return Math.floor(Math.random(min) * Math.floor(max));
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 
   function getRandom(min,max) {
