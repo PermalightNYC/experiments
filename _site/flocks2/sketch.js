@@ -15,11 +15,11 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   pixelDensity(1.5);
   frameRate(fps);
-  colors = [color('#6548cd'), color('#1e1e1e')];
+  colors = [color('#6548cd'), color('#c45a61'), color('#9fdbe2'), color('#c0fd86'), color('#eefe53')];
   flock = new Flock();
 
   for (var i = 0; i < numShapes; i++) {
-    var b = new Boid(random(width), random(height), lerpColor(colors[0], colors[1], random(1)));
+    var b = new Boid(random(width), random(height), getRandomColor());
     flock.addBoid(b);
   }
 }
@@ -33,11 +33,11 @@ function draw() {
 
 // Add a new boid into the System
 function mouseMoved() {
-  flock.addBoid(new Boid(mouseX, mouseY, lerpColor(colors[0], colors[1], random(1)), true));
+  flock.addBoid(new Boid(mouseX, mouseY, getRandomColor(), true));
 }
 // Add a new boid into the System
 function touchMoved() {
-  flock.addBoid(new Boid(mouseX, mouseY, lerpColor(colors[0], colors[1], random(1)), true));
+  flock.addBoid(new Boid(mouseX, mouseY, getRandomColor(), true));
 }
 
 // Flock object
@@ -125,7 +125,9 @@ Boid.prototype.seek = function(target) {
 
 Boid.prototype.render = function() {
   var c = this.color;
-  if (this.lifespan) {
+  if (this.lifespan <= 0) {
+    c._array[3] = 0;
+  } else {
     c._array[3] = this.lifespan / 255;
   }
   fill(c);

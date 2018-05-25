@@ -15,7 +15,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   pixelDensity(1.5);
   frameRate(fps);
-  colors = [color('#6e40d5'), color('#1e1e1e')];
+  colors = [color('#6548cd'), color('#1e1e1e')];
   flock = new Flock();
 
   for (var i = 0; i < numShapes; i++) {
@@ -26,7 +26,6 @@ function setup() {
 
 function draw() {
   background(0);
-  // flock.addBoid(new Boid(random(width), random(height), lerpColor(colors[0], colors[1], random(1))));
   flock.run();
 }
 
