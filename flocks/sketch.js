@@ -33,7 +33,7 @@ function draw() {
 
 
 // Add a new boid into the System
-function mousePressed() {
+function mouseMoved() {
   flock.addBoid(new Boid(mouseX, mouseY, lerpColor(colors[0], colors[1], random(1)), true));
 }
 // Add a new boid into the System
@@ -71,9 +71,9 @@ var Boid = function(x, y, col, temp) {
   this.position = createVector(x, y);
   this.color = col;
   this.r = 3.0;
-  this.size = random(radius/3,radius);
-  this.maxspeed = 1; // Maximum speed
-  this.maxforce = 0.001; // Maximum steering force
+  this.size = random(radius/2,radius);
+  this.maxspeed = 2; // Maximum speed
+  this.maxforce = 0.005; // Maximum steering force
   this.lifespan = defaultLifespan;
   if (temp) {
     this.dying = true;
@@ -142,7 +142,7 @@ Boid.prototype.borders = function() {
 }
 
 Boid.prototype.separate = function(boids) {
-  var desiredseparation = 25.0;
+  var desiredseparation = this.size;
   var steer = createVector(0, 0);
   var count = 0;
   for (var i = 0; i < boids.length; i++) {
@@ -170,7 +170,7 @@ Boid.prototype.separate = function(boids) {
 }
 
 Boid.prototype.align = function(boids) {
-  var neighbordist = 10;
+  var neighbordist = this.size;
   var sum = createVector(0, 0);
   var count = 0;
   for (var i = 0; i < boids.length; i++) {
@@ -193,7 +193,7 @@ Boid.prototype.align = function(boids) {
 }
 
 Boid.prototype.cohesion = function(boids) {
-  var neighbordist = radius*2;
+  var neighbordist = this.size;
   var sum = createVector(0, 0);
   var count = 0;
   for (var i = 0; i < boids.length; i++) {
@@ -210,15 +210,6 @@ Boid.prototype.cohesion = function(boids) {
     return createVector(0, 0);
   }
 }
-
-Boid.prototype.isDying = function() {
-  // console.log(this);
-  if (this.dying) {
-    return true;
-  } else {
-    return false;
-  }
-};
 
 Boid.prototype.isDead = function(){
   if (this.lifespan < 0) {
