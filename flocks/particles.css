@@ -12,6 +12,10 @@ body {
   padding: 0;
 }
 
+body:hover {
+  cursor: pointer;
+}
+
 canvas {
   height: 100vh;
   width: 100vw;

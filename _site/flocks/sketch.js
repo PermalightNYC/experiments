@@ -1,9 +1,10 @@
 var fps = 60;
-var numShapes = 50;
+var numShapes = 100;
 var radius = 18;
 var boids = [];
 var colors;
 var flock;
+var defaultLifespan = 1000;
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight, WEBGL);
@@ -14,12 +15,11 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   pixelDensity(1.5);
   frameRate(fps);
-  noCursor();
   colors = [color('#6e40d5'), color('#1e1e1e')];
   flock = new Flock();
 
   for (var i = 0; i < numShapes; i++) {
-    var b = new Boid(random(width), random(height), getRandomColor());
+    var b = new Boid(random(width), random(height), lerpColor(colors[0], colors[1], random(1)));
     flock.addBoid(b);
   }
 }
@@ -34,11 +34,11 @@ function draw() {
 
 // Add a new boid into the System
 function mousePressed() {
-  flock.addBoid(new Boid(mouseX, mouseY, lerpColor(colors[0], colors[1], random(1))));
+  flock.addBoid(new Boid(mouseX, mouseY, lerpColor(colors[0], colors[1], random(1)), true));
 }
 // Add a new boid into the System
 function touchMoved() {
-  flock.addBoid(new Boid(mouseX, mouseY, lerpColor(colors[0], colors[1], random(1))));
+  flock.addBoid(new Boid(mouseX, mouseY, lerpColor(colors[0], colors[1], random(1)), true));
 }
 
 // Flock object
@@ -65,7 +65,7 @@ Flock.prototype.addBoid = function(b) {
 
 
 
-var Boid = function(x, y, col) {
+var Boid = function(x, y, col, temp) {
   this.acceleration = createVector(0, 0);
   this.velocity = p5.Vector.random2D();
   this.position = createVector(x, y);
@@ -74,6 +74,12 @@ var Boid = function(x, y, col) {
   this.size = random(radius/3,radius);
   this.maxspeed = 1; // Maximum speed
   this.maxforce = 0.001; // Maximum steering force
+  this.lifespan = defaultLifespan;
+  if (temp) {
+    this.dying = true;
+  } else {
+    this.dying = false;
+  }
 }
 
 Boid.prototype.run = function(boids) {
@@ -104,6 +110,9 @@ Boid.prototype.update = function() {
   this.velocity.limit(this.maxspeed);
   this.position.add(this.velocity);
   this.acceleration.mult(0);
+  if (this.dying) {
+    this.lifespan -= 2;
+  }
 }
 
 Boid.prototype.seek = function(target) {
@@ -116,7 +125,11 @@ Boid.prototype.seek = function(target) {
 }
 
 Boid.prototype.render = function() {
-  fill(this.color);
+  var c = this.color;
+  if (this.lifespan) {
+    c._array[3] = this.lifespan / 255;
+  }
+  fill(c);
   noStroke();
   ellipse(this.position.x, this.position.y, this.size, this.size);
 }
@@ -180,7 +193,7 @@ Boid.prototype.align = function(boids) {
 }
 
 Boid.prototype.cohesion = function(boids) {
-  var neighbordist = 50;
+  var neighbordist = radius*2;
   var sum = createVector(0, 0);
   var count = 0;
   for (var i = 0; i < boids.length; i++) {
@@ -197,6 +210,15 @@ Boid.prototype.cohesion = function(boids) {
     return createVector(0, 0);
   }
 }
+
+Boid.prototype.isDying = function() {
+  // console.log(this);
+  if (this.dying) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 Boid.prototype.isDead = function(){
   if (this.lifespan < 0) {
