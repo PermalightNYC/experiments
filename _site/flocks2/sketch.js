@@ -18,6 +18,10 @@ function setup() {
   colors = [color('#6548cd'), color('#c45a61'), color('#9fdbe2'), color('#c0fd86'), color('#eefe53')];
   flock = new Flock();
 
+  if (windowWidth < 768) {
+    numShapes = 40;
+  }
+
   for (var i = 0; i < numShapes; i++) {
     var b = new Boid(random(width), random(height), getRandomColor());
     flock.addBoid(b);
@@ -71,7 +75,7 @@ var Boid = function(x, y, col, temp) {
   this.color = col;
   this.r = 3.0;
   this.size = random(radius/2,radius);
-  this.maxspeed = 2; // Maximum speed
+  this.maxspeed = 0.5; // Maximum speed
   this.maxforce = 0.005; // Maximum steering force
   this.lifespan = defaultLifespan;
   if (temp) {
