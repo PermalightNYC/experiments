@@ -71,7 +71,7 @@ var Boid = function(x, y, col, temp) {
   this.color = col;
   this.r = 3.0;
   this.size = random(radius/2,radius);
-  this.maxspeed = 1; // Maximum speed
+  this.maxspeed = 0.5; // Maximum speed
   this.maxforce = 0.005; // Maximum steering force
   this.lifespan = defaultLifespan;
   if (temp) {
