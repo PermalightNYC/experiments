@@ -1,0 +1,14 @@
+body:hover {
+  cursor: pointer;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.2em;
+}
+
+body.background--dark {
+  color: #696969;
+}
