@@ -2,7 +2,7 @@ let video;
 let vScale = 16;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(960, 720);
   pixelDensity(1);
 
   var constraints = {
@@ -49,6 +49,6 @@ function draw() {
 ******************/
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(960, 720);
   video.size(width / vScale, height / vScale);
 }
