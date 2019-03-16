@@ -26,7 +26,7 @@ module.exports = function (config) {
       output: "dist",
       includes: "_includes"
     },
-    templateFormats: ["njk", "md", "png", "ico", "pdf"],
+    templateFormats: ["njk", "md", "png", "ico", "pdf", "css", "js"],
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
     passthroughFileCopy: true
