@@ -6,14 +6,8 @@ module.exports = function (config) {
   config.addFilter("timestamp", require("./filters/timestamp.js"));
   config.addFilter("squash", require("./filters/squash.js"));
 
-
-  config.addPassthroughCopy('img');
-  config.addPassthroughCopy('css');
-  config.addPassthroughCopy('js');
-
   config.addCollection('experiments', function (collection) {
-    return collection.getAll().reverse().filter(function (item) {
-      // console.log('status' in item.data);
+    return collection.getAllSorted().reverse().filter(function (item) {
       if ('status' in item.data == true) {
         return item.data
       }
@@ -26,7 +20,7 @@ module.exports = function (config) {
       output: "dist",
       includes: "_includes"
     },
-    templateFormats: ["njk", "md", "png", "ico", "pdf"],
+    templateFormats: ["njk", "md", "png", "ico", "pdf", "css", "js"],
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
     passthroughFileCopy: true
