@@ -1,0 +1,16 @@
+html {
+  background: #000;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  align-items: center;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  min-height: 100%;
+  padding: 0;
+}
