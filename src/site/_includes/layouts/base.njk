@@ -4,8 +4,12 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>{{ title or metadata.title }}</title>
-		<link rel="stylesheet" href="{{ '/css/main.css' | url }}?ver=1" />
 		{%- include 'favicon-social.njk' -%}
+    {% set css %}
+      {% include "css/normalize.css" %}
+      {% include "css/main.css" %}
+    {% endset %}
+    <style>{{ css | cssmin | safe }}</style>
 		{% block styles %}{% endblock %}
 	</head>
 	<body class="{% block bodyClass %}{% endblock %}">

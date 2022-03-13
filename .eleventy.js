@@ -1,12 +1,20 @@
-module.exports = function (config) {
+const CleanCSS = require("clean-css");
 
+module.exports = function (eleventyConfig) {
 
   // Add a date formatter filter to Nunjucks
-  config.addFilter("dateDisplay", require("./filters/dates.js"));
-  config.addFilter("timestamp", require("./filters/timestamp.js"));
-  config.addFilter("squash", require("./filters/squash.js"));
+  eleventyConfig.addFilter("dateDisplay", require("./filters/dates.js"));
+  eleventyConfig.addFilter("timestamp", require("./filters/timestamp.js"));
+  eleventyConfig.addFilter("squash", require("./filters/squash.js"));
 
-  config.addCollection('experiments', function (collection) {
+  eleventyConfig.addPassthroughCopy('css');
+
+  // Minify CSS
+  eleventyConfig.addFilter("cssmin", function (code) {
+    return new CleanCSS({}).minify(code).styles;
+  });
+
+  eleventyConfig.addCollection('experiments', function (collection) {
     return collection.getAllSorted().reverse().filter(function (item) {
       if ('status' in item.data == true) {
         return item.data
