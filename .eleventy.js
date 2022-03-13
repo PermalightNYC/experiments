@@ -14,6 +14,8 @@ module.exports = function (eleventyConfig) {
     return new CleanCSS({}).minify(code).styles;
   });
 
+  eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+
   eleventyConfig.addCollection('experiments', function (collection) {
     return collection.getAllSorted().reverse().filter(function (item) {
       if ('status' in item.data == true) {
