@@ -21,7 +21,9 @@
 			{% include 'button--back.njk' %}
 		{% endblock %}
 
-		{{ layoutContent | safe }}
+    {% block content %}
+      {{ layoutContent | safe }}
+    {% endblock %}
 
 		{% block footer %}
 		<footer>
