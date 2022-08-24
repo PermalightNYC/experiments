@@ -30,7 +30,7 @@ module.exports = function (eleventyConfig) {
       output: "dist",
       includes: "_includes"
     },
-    templateFormats: ["njk", "md", "png", "ico", "pdf", "css", "js", "wav", "mp3", "gltf"],
+    templateFormats: ["njk", "md", "png", "ico", "pdf", "css", "js", "wav", "mp3", "gltf", "glb"],
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
     passthroughFileCopy: true

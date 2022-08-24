@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/product-model"
+  to = "/nomad-3d"
+  status = 301
+  force = true
