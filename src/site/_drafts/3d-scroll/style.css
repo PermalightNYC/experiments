@@ -1,0 +1,141 @@
+:root {
+  --color-background: 255, 255, 255;
+  --color-foreground: 0, 0, 0;
+  --color-accent: 87,196,245;
+  --alpha-default: 0.5;
+  --alpha-low: 0.1;
+}
+
+html {
+  scroll-behavior: smooth !important;
+}
+.background--dark {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+.background--dark .button--back {
+  color: rgb(var(--color-foreground));
+}
+
+canvas {
+  inset: 0;
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+}
+
+section {
+  display: grid;
+  min-height: 100vh;
+  place-items: center center;
+  text-shadow: 0 0 5px rgb(var(--color-background));
+  z-index: 1;
+}
+
+.section-content {
+  max-width: 40ch;
+  padding-right: 30ch;
+}
+
+h1 {
+  color: rgb(var(--color-foreground));
+}
+
+.section-3 .section-content {
+  padding-right: 0;
+  padding-left: 45ch;
+}
+
+.section-7 {
+  place-items: end center;
+}
+.section-7 .section-content {
+  padding-bottom: 5rem;
+  padding-right: 0;
+  padding-left: 0;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  left: 1rem;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.controls > li > a {
+  background: rgba(var(--color-foreground), var(--alpha-low));
+  border-radius: 1.5rem;
+  color: rgb(var(--color-foreground));
+  display: block;
+  height: 1.5rem;
+  margin: 0 0 .5rem;
+  overflow: hidden;
+  padding: .5rem;
+  position: relative;
+  text-decoration: none;
+  text-indent: 2.5rem;
+  transition: width .5s ease-in-out;
+  width: 1.5rem;
+  white-space: nowrap;
+}
+.controls > li > a::before {
+  background: rgb(var(--color-background));
+  border-radius: 1rem;
+  display: inline-block;
+  content: '';
+  height: 1rem;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateX(-100%) translateY(-50%);
+  transform-origin: center left;
+  transition: transform .2s ease-in-out;
+  width: 1rem;
+}
+.controls > li > a:hover {
+  width: 100%;
+}
+.controls > li > a:hover::before,
+.controls > li > a.active::before {
+  background: rgb(var(--color-accent));
+  transform: translateX(.75rem) translateY(-50%);
+}
+.controls > li > a:hover::before {
+  background: #888;
+}
+
+.button {
+  appearance: none;
+  background: rgb(var(--color-foreground));
+  border-radius: 3rem;
+  color: rgb(var(--color-background));
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  margin-top: 1rem;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: uppercase;
+  transition: background-color .5s ease-in-out;
+}
+.button:hover {
+  background: rgba(var(--color-foreground), var(--alpha-default));
+}
+
+.scroll-to-top {
+  bottom: 0;
+  color: rgb(var(--color-foreground));
+  opacity: 0;
+  position: fixed;
+  right: 2rem;
+  text-decoration: none;
+  visibility: hidden;
+}

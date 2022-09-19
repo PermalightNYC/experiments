@@ -15,7 +15,7 @@ function setup() {
 function draw() {
   // orbitControl();
   background(0);
-  // rotateY(millis() / 5000);
+  rotateY(millis() / 5000);
   // rotateZ(millis() / 5000);
   // rotateX(millis() / 5000);
   directionalLight(255, width / 2, height / 2, -(frameCount * 2));

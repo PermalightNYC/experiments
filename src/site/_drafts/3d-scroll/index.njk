@@ -1,0 +1,50 @@
+---
+title: 3D Scroll
+tags:
+- JS
+- threejs
+- gsap
+date: 2022-09-18
+---
+{% extends 'layouts/experiment.njk' %}
+{% block styles %}
+  <link rel="stylesheet" href="style.css">
+{% endblock %}
+{% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
+  <script src="GSDevTools.min.js"></script>
+  <script src="https://unpkg.com/three@0.144.0/build/three.js"></script>
+  <script src="https://unpkg.com/three@0.144.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://unpkg.com/three@0.144.0/examples/js/loaders/DRACOLoader.js"></script>
+  <script src="https://unpkg.com/three@0.144.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://unpkg.com/three@0.144.0/examples/js/helpers/SpotLightHelper.js"></script>
+  <script src="sketch.js" type="module"></script>
+{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+  <ul class="controls">
+    {% for i in range(0, 8) -%}
+      <li>
+        <a href="#Section-{{ i }}" class="nav-item nav-item-{{ i }}{% if loop.first %} active{% endif %}">
+          Section {{ i }}
+        </a>
+      </li>
+    {%- endfor %}
+  </ul>
+  {% for i in range(0, 8) -%}
+    <section id="Section-{{ i }}" class="section-{{ i }}">
+      <div class="section-content">
+        <h1>Section {{ i }}</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum itaque deleniti, quod neque ab ad totam nihil, quam dicta aliquam ut amet! Quidem vero pariatur deleniti quaerat, vitae accusamus.</p>
+        {% if loop.last %}
+          <a href="#" class="button">Buy Brain Gain</a>
+        {% endif %}
+      </div>
+    </section>
+  {%- endfor %}
+  <a href="#Section-0" class="scroll-to-top">
+    &#8593;
+  </a>
+{% endblock %}
