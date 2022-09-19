@@ -27,7 +27,7 @@ date: 2022-09-18
   <ul class="controls">
     {% for i in range(0, 8) -%}
       <li>
-        <a href="#Section-{{ i }}" class="nav-item nav-item-{{ i }}{% if loop.first %} active{% endif %}">
+        <a href="#Section-{{ i }}" class="nav-item nav-item-{{ i }}"{% if loop.first %} aria-current{% endif %}>
           Section {{ i }}
         </a>
       </li>
@@ -39,7 +39,7 @@ date: 2022-09-18
         <h1>Section {{ i }}</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum itaque deleniti, quod neque ab ad totam nihil, quam dicta aliquam ut amet! Quidem vero pariatur deleniti quaerat, vitae accusamus.</p>
         {% if loop.last %}
-          <a href="#" class="button">Buy Brain Gain</a>
+          <a href="https://drinkgoodpharma.com/products/brain-gain-coffee-infusion" class="button">Buy Brain Gain</a>
         {% endif %}
       </div>
     </section>

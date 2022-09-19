@@ -1,13 +1,14 @@
 :root {
   --color-background: 255, 255, 255;
   --color-foreground: 0, 0, 0;
-  --color-accent: 87,196,245;
-  --alpha-default: 0.5;
+  --color-accent: 185,157,135;
+  --alpha-default: 0.75;
   --alpha-low: 0.1;
 }
 
 html {
   scroll-behavior: smooth !important;
+  overflow-x: hidden;
 }
 .background--dark {
   background: rgb(var(--color-background));
@@ -28,22 +29,47 @@ section {
   display: grid;
   min-height: 100vh;
   place-items: center center;
-  text-shadow: 0 0 5px rgb(var(--color-background));
-  z-index: 1;
-}
-
-.section-content {
-  max-width: 40ch;
-  padding-right: 30ch;
+  position: relative;
 }
 
 h1 {
   color: rgb(var(--color-foreground));
 }
 
-.section-3 .section-content {
-  padding-right: 0;
-  padding-left: 45ch;
+.section-content {
+  padding: 0 1rem 0 5rem;
+}
+
+@media (min-width: 40em) {
+  .section-content {
+    max-width: 40ch;
+    padding-right: 30ch;
+  }
+
+  .section-3 .section-content {
+    padding-right: 0;
+    padding-left: 45ch;
+  }
+
+}
+
+.section-6::after {
+  background: rgba(var(--color-accent), var(--alpha-default));
+  content: '';
+  height: 100vh;
+  position: absolute;
+  transform: skew(83deg);
+  width: 300vw;
+  z-index: -2;
+}
+.section-4::after {
+  background: rgba(var(--color-accent), var(--alpha-default));
+  content: '';
+  height: 100vh;
+  position: absolute;
+  transform: skew(-83deg);
+  width: 300vw;
+  z-index: -2;
 }
 
 .section-7 {
@@ -59,14 +85,14 @@ h1 {
 .controls {
   display: flex;
   flex-direction: column;
-  height: auto;
-  left: 1rem;
+  height: 100vh;
+  justify-content: center;
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 1rem;
   position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+  z-index: 2;
 }
 
 .controls > li > a {
@@ -81,9 +107,10 @@ h1 {
   position: relative;
   text-decoration: none;
   text-indent: 2.5rem;
-  transition: width .5s ease-in-out;
+  transition: width .2s ease-in-out;
   width: 1.5rem;
   white-space: nowrap;
+  z-index: 2;
 }
 .controls > li > a::before {
   background: rgb(var(--color-background));
@@ -96,24 +123,24 @@ h1 {
   top: 50%;
   transform: translateX(-100%) translateY(-50%);
   transform-origin: center left;
-  transition: transform .2s ease-in-out;
+  transition: transform .2s ease-out;
   width: 1rem;
 }
 .controls > li > a:hover {
-  width: 100%;
+  width: 8rem;
 }
 .controls > li > a:hover::before,
-.controls > li > a.active::before {
+.controls > li > a[aria-current]::before {
   background: rgb(var(--color-accent));
   transform: translateX(.75rem) translateY(-50%);
 }
 .controls > li > a:hover::before {
-  background: #888;
+  background: rgb(var(--color-background));
 }
 
 .button {
   appearance: none;
-  background: rgb(var(--color-foreground));
+  background: rgb(var(--color-accent));
   border-radius: 3rem;
   color: rgb(var(--color-background));
   display: inline-block;
@@ -127,7 +154,7 @@ h1 {
   transition: background-color .5s ease-in-out;
 }
 .button:hover {
-  background: rgba(var(--color-foreground), var(--alpha-default));
+  background: rgba(var(--color-accent), var(--alpha-default));
 }
 
 .scroll-to-top {

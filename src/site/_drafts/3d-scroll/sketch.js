@@ -1,9 +1,5 @@
 let scene, camera, light, cube, MODEL, renderer, gltf
 
-const sizes = {
-  scale: 1.5
-}
-
 const initGSAP = () => {
   MODEL = scene.getObjectByName("MODEL")
 
@@ -11,56 +7,61 @@ const initGSAP = () => {
     id: 'Main Scroller',
     scrollTrigger: {
       trigger: ".section-0",
-      start: "top top",
+      start: "center center",
       endTrigger: ".section-7",
       end: "bottom bottom",
-      scrub: 1,
+      scrub: true,
     }
   });
 
   tl.addLabel("start")
-    .to(".scroll-to-top", { autoAlpha: 1, bottom: "2rem" }, "start")
-    .call(prepareControls, [0], "start")
 
     .to(MODEL.rotation, { y: `+=${Math.PI * .25}` }, "first")
-    .call(prepareControls, [1], "first")
+    .to(".scroll-to-top", { autoAlpha: 1, bottom: "2rem" }, "first")
+    .call(prepareControls, [0], "first")
 
     .to(MODEL.rotation, { y: `-=${Math.PI / 1.2}` }, "second")
-    .call(prepareControls, [2], "second")
+    .call(prepareControls, [1], "second")
 
-    .to(MODEL.position, { x: `-=2`, y: `-=1` }, "third")
-    .call(prepareControls, [3], "third")
+    .to(MODEL.position, { x: `-=3.5` }, "third")
+    .call(prepareControls, [2], "third")
 
-    .to(MODEL.rotation, { y: `-=${Math.PI * 1.1}` }, "forth")
+    .to(MODEL.rotation, { y: `-=${Math.PI * 1}` }, "forth")
+    .to(MODEL.position, { y: `-=.5` }, "-=1")
     .to(MODEL.scale, { x: `+=1`, y: `+=1`, z: `+=1` }, "-=1")
-    .call(prepareControls, [4], "forth")
+    .call(prepareControls, [3], "forth")
 
     .to(MODEL.rotation, { y: `+=${Math.PI * .1}`, x: `+=${Math.PI * .25}` }, "fifth")
     .to(MODEL.scale, { x: `-=1`, y: `-=1`, z: `-=1` }, "-=1")
-    .to(MODEL.position, { x: `+=2`, y: `+=1` }, "-=1")
+    .to(MODEL.position, { x: `+=3.5`, y: `+=.8` }, "-=1")
+    .call(prepareControls, [4], "fifth")
 
-    .to(MODEL.position, { x: '-=0' }, "fifth")
-    .call(prepareControls, [5], "fifth")
+    .to(MODEL.rotation, { x: `-=${Math.PI * .25}`, y: `+=${Math.PI}` }, "sixth")
+    .call(prepareControls, [5], "sixth")
 
-    .to(MODEL.rotation, { x: `-=${Math.PI * .25}` }, "sixth")
-    .call(prepareControls, [6], "sixth")
-    .to(MODEL.position, { y: `+=.5`, x: `-=1.5` }, "seventh")
-    .call(prepareControls, [7], "seventh")
+    .to(MODEL.rotation, { x: `+=${Math.PI * .1}`, y: `+=${Math.PI}` }, "seventh")
+    .to(MODEL.position, { x: `-=1.2`, y: `+=.5` }, "seventh")
+    .call(prepareControls, [6], "seventh")
+
     .addLabel("end")
+    .call(prepareControls, [7], "end")
 
 }
 
 const prepareControls = (i) => {
   document.querySelectorAll('.nav-item').forEach(btn => {
     if (btn.classList.contains(`nav-item-${i}`)) {
-      btn.classList.add('active')
+      btn.setAttribute('aria-current', '')
     } else {
-      btn.classList.remove('active')
+      btn.removeAttribute('aria-current')
     }
   })
 }
 
 const init = () => {
+  const sizes = {
+    scale: innerWidth < 768 ? 1 : 1.5
+  }
   scene = new THREE.Scene()
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000)
   renderer = new THREE.WebGLRenderer({ alpha: true })
@@ -71,10 +72,9 @@ const init = () => {
   renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1)
 
   renderer.setSize(window.innerWidth, window.innerHeight)
-  document.body.appendChild(renderer.domElement)
+  document.body.prepend(renderer.domElement)
 
   const backLight = new THREE.DirectionalLight(0x404040, 1)
-  backLight.name = 'Back Light'
   backLight.position.set(-6, -9, -12)
   backLight.target.position.set(0, 0, 0)
   scene.add(backLight)
@@ -91,7 +91,6 @@ const init = () => {
   keyLight.castShadow = true
   keyLight.shadow.mapSize.width = 1024 * 4;
   keyLight.shadow.mapSize.height = 1024 * 4;
-  keyLight.name = 'keyLight'
   keyLight.shadow.bias = -.005
   scene.add(keyLight)
 
@@ -103,6 +102,7 @@ const init = () => {
     console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
   };
   manager.onLoad = function () {
+    initGSAP()
     console.log('Loading complete!');
   };
   manager.onProgress = function (url, itemsLoaded, itemsTotal) {
@@ -129,14 +129,12 @@ const init = () => {
     const children = [...gltf.scene.children]
     children.forEach((child) => {
       child.position.x = sizes.scale
-      child.position.y = -(sizes.scale / 2)
+      child.position.y = -(sizes.scale / sizes.scale)
       child.rotation.y = Math.PI * -.25
       child.scale.set(sizes.scale, sizes.scale, sizes.scale)
       child.name = "MODEL"
       scene.add(child)
     })
-
-    initGSAP()
 
   })
 
