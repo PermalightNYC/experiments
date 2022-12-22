@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/PermalightNYC/experiments#readme",
   "dependencies": {
-    "@11ty/eleventy": "^2.0.0-canary.3",
+    "@11ty/eleventy": "^2.0.0-canary.23",
     "clean-css": "^5.2.4"
   }
 }
