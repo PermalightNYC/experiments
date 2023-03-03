@@ -59,7 +59,7 @@ h1 {
   height: 100vh;
   position: absolute;
   transform: skew(83deg);
-  width: 300vw;
+  width: 500vh;
   z-index: -2;
 }
 .section-4::after {
@@ -68,7 +68,7 @@ h1 {
   height: 100vh;
   position: absolute;
   transform: skew(-83deg);
-  width: 300vw;
+  width: 500vh;
   z-index: -2;
 }
 
