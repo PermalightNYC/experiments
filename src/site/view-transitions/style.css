@@ -1,0 +1,55 @@
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  letter-spacing: 0.2em;
+}
+
+body.background--dark {
+  color: #696969;
+}
+
+main {
+  padding: 5rem;
+  text-align: center;
+}
+
+@media not (prefers-reduced-motion: reduce) {
+	main { view-transition-name: main }
+}
+
+/* Old stuff going out */
+::view-transition-old(main) {
+  animation: fade 0.2s ease forwards;
+}
+
+/* New stuff coming in */
+::view-transition-new(main) {
+  animation: fade 0.4s ease reverse;
+}
+
+main.page-1 {
+  position: absolute;
+  top: 0;
+}
+main.page-3 {
+  position: absolute;
+  bottom: 0;
+}
+
+main a {
+  color: var(--color-accent);
+  letter-spacing: .2em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

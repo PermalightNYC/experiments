@@ -1,0 +1,28 @@
+---
+title: View Transitions
+tags:
+- HTML
+- CSS
+- JS
+date: 2023-10-20
+---
+{% extends 'layouts/experiment.njk' %}
+{% block styles %}
+  <link rel="stylesheet" href="../style.css">
+{% endblock %}
+{% block nav %}
+  {{ super() }}
+{% endblock %}
+{% block scripts %}
+  <script src="../script.js"></script>
+{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+<main class="page-3">
+  <h1>View Transition Page 3</h1>
+  <a href="../">Page 1</a>
+  <a href="../2/">Page 2</a>
+  <a href="#">Page 3</a>
+</main>
+{% endblock %}
