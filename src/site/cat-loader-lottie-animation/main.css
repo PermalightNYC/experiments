@@ -1,0 +1,76 @@
+html {
+	height: 100%;
+}
+
+html,
+body {
+	background: white;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	display: grid;
+	min-height: 100%;
+	place-content: center;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  word-wrap: normal !important;
+}
+
+#bm {
+	aspect-ratio: 31/26;
+	margin-inline: auto;
+	max-width: 80vw;
+	width: 80vw;
+}
+
+#bm[playing] ~ .buttons button[name="play"] {
+	display: none;
+}
+
+#bm:not([playing]) ~ .buttons button[name="pause"] {
+	display: none;
+}
+
+.buttons {
+	text-align: center;
+}
+
+button {
+	appearance: none;
+	background: none;
+	border: 0;
+}
+
+button > svg {
+	color: rgb(152,152,193);
+	fill: rgb(152,152,193);
+	height: 1.5rem;
+	width: auto;
+}
+
+button[name="play"] > svg {
+	color: rgb(51,57,78);
+	fill: rgb(51,57,78);
+}
+
+@media (min-width: 40em) {
+
+
+  #bm {
+    aspect-ratio: unset;
+    margin-inline: auto;
+    max-width: 50vw;
+    width: 50vw;
+  }
+}
