@@ -35,6 +35,11 @@
 		{%- include 'ga.njk' -%}
 		{%- include 'typekit.njk' -%}
 		{% block scripts %}{% endblock %}
+
+    {% if eleventy.env.runMode === 'build' %}
+      <script defer data-domain="permalightnyc.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+      <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    {% endif %}
 		<!-- Current page: {{ page.url | url }} -->
 	</body>
 </html>
