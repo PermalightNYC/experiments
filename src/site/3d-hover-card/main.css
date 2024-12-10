@@ -10,7 +10,7 @@ html,
 }
 .hovercard {
 	height: 100%;
-	padding-inline: 2rem;
+	padding: 2rem;
 }
 
 img,
@@ -44,6 +44,7 @@ svg {
 .grid--stack {
   display: grid;
   grid-template-columns: 1fr;
+  pointer-events: none;
 	place-content: center center;
 }
 .grid--stack > .layer {
@@ -61,7 +62,6 @@ svg {
 .layer__top svg {
 	color: rgba(var(--color, 0,0,0), 0);
 	height: auto;
-	filter: drop-shadow(0 0 .5rem rgba(0,0,0,.5));
 	transition: color .2s ease-out;
 	width: 50%;
 }
