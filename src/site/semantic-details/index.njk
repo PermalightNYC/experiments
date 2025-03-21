@@ -1,0 +1,36 @@
+---
+title: "Semantic <details>"
+tags:
+- HTML
+date: 2025-03-21
+status: publish
+---
+{% extends 'layouts/experiment.njk' %}
+{% block bodyClass %}background--light{% endblock %}
+{% block styles %}
+  <link rel="stylesheet" href="sketch.css">
+{% endblock %}
+{% block scripts %}
+  <script src="expand.js" defer></script>
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block content %}
+  <div class="page-content">
+    <p>This page demonstrates how you can use native find functionality to expand a details element, but content hidden within divs will not be expanded. Search for <code>foo</code>. It lists 3 occurances but can only highlight 2; One is inside a <code>{% filter escape %}<details>{% endfilter %}</code> Element and the other is inside a 0 height div with a toggle class on the parent element.</p>
+    <h1>Content in details element</h1>
+    <details>
+      <summary>Default expansion</summary>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi mollitia velit aperiam, officia repellat ab ex iste neque facere minus ipsum, perspiciatis excepturi! Ut veniam officia, perferendis iste sint fugiat? <code>foo</code>
+      </p>
+    </details>
+    <h1>Content in divs</h1>
+    <demo-collapse class="collapse">
+      <button name="toggle">Show content button</button>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi mollitia velit aperiam, officia repellat ab ex iste neque facere minus ipsum, perspiciatis excepturi! Ut veniam officia, perferendis iste sint fugiat? <code>foo</code>
+      </p>
+    </demo-collapse>
+  </div>
+{% endblock %}
+
